@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final String [] cities = {"Recife", "João Pessoa", "Natal",
@@ -18,7 +19,14 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = (ListView)findViewById(R.id.list_view);
         listView.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, cities)
+                R.layout.city_listitem,
+                R.id.city_name, cities
+                )
         );
+
+        listView.setOnItemClickListener((parent, view, position, id) ->
+                Toast.makeText(parent.getContext(),
+                        "Cidade selecionada: " + cities[position],
+                        Toast.LENGTH_SHORT).show());
     }
 }
